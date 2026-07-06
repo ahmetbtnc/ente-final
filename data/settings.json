@@ -1,0 +1,68 @@
+{
+  "firma_logosu": "",
+  "favicon_resmi": "",
+  "slogan": "Hassas Kalıp. Güvenilir Enjeksiyon.",
+  "kurumsal_renk": "#ff5a1f",
+  "teknik_renk": "#00e5ff",
+
+  "hero_ust_baslik": "Kalıp Üretimi & Enjeksiyon Çözümleri",
+  "hero_ana_baslik": "Fikrinizi <span class='molten-text'>mikron</span> hassasiyetle<br> parçaya dönüştürüyoruz.",
+  "hero_alt_aciklama": "1998'den bu yana plastik kalıp tasarımı ve seri enjeksiyon üretiminde; otomotiv, elektronik ve beyaz eşya sektörlerine hizmet veriyoruz.",
+  "hero_urunler_btn_metni": "Ürünlerimizi İncele",
+  "hero_animasyon_hizi": 2600,
+  "parcacik_efekti_aktif": true,
+
+  "sayac_1_isim": "Yıllık Tecrübe",
+  "sayac_1_deger": 27,
+  "sayac_2_isim": "Tamamlanan Kalıp",
+  "sayac_2_deger": 600,
+  "sayac_3_isim": "mm Hassasiyet",
+  "sayac_3_deger": 0.02,
+  "sayac_3_ondalikli": true,
+
+  "hakkimizda_baslik": "Sektörde <span id='yearsSpan'>27</span> yıllık tecrübe.",
+  "hakkimizda_aciklama": "Ente Metal Plastik olarak, plastik enjeksiyon kalıbı tasarımından seri imalata kadar uzanan tüm endüstriyel süreci kendi entegre tesislerimizde tek çatı altında yürütüyoruz.",
+  "vizyon_maddeleri": [
+    "Yüksek standartlı ISO üretim süreç entegrasyonu",
+    "Bünyemizde CAD/CAM destekli kalıp tasarım laboratuvarı"
+  ],
+
+  "hizmetler_listesi": [
+    {
+      "baslik": "Plastik Kalıp Üretimi",
+      "aciklama": "Hassas CNC dik işleme merkezlerimizde, çelik blokları mikron düzeyinde işleyerek uzun ömürlü seri üretim kalıpları üretiyoruz.",
+      "ikon_svg": ""
+    },
+    {
+      "baslik": "Enjeksiyon Üretimi",
+      "aciklama": "Yüksek tonajlı modern enjeksiyon preslerimizle; mühendislik plastikleri, ABS, PA, PC ve PP hammaddelerini hatasız basıyoruz.",
+      "ikon_svg": ""
+    }
+  ],
+
+  "kurulus_yili": 1998,
+  "telefon_goruntu": "0555 000 00 00",
+  "whatsapp_numara": "905550000000",
+  "eposta": "info@entemetalplastik.com",
+  "adres": "Örnek OSB, 5. Cadde No:12, Bursa / Türkiye",
+  "calisma_saatleri": "Pazartesi - Cuma: 08:00 - 18:00 / Cumartesi: 09:00 - 14:00",
+  "harita_gomme_linki": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3033.0!2d29.0!3d40.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDEyJzAwLjAiTiAyOcKwMDAnMDAuMCJF!5e0!3m2!1str!2str!4v1234567890",
+  "instagram": "",
+  "linkedin": "",
+
+  "oneCikanBaslik": "Öne Çıkan Üretimlerimiz",
+  "oneCikanAciklama": "Seçtiğimiz referans projelere göz atın, detay için üzerine tıklayın.",
+  "tum_urunler_buton_metni": "Tüm Ürün Kataloğunu Aç",
+  "nav_teklif_btn_metni": "Teklif Al",
+
+  "teklif_formu_aktif": true,
+  "teklif_formu_baslik": "Hızlı Teklif İsteyin",
+  "teklif_formu_aciklama": "Projenize ait verileri veya teknik çizimleri paylaşarak fiyat teklifi alabilirsiniz.",
+  "form_tel_aktif": true,
+  "form_tel_zorunlu": true,
+  "form_dosya_aktif": true,
+
+  "wa_float_aktif": true,
+  "wa_inline_aktif": true,
+  "urun_kartlari_yeni_pencere": false
+}

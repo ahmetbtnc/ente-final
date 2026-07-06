@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENTE Metal Plastik | Yönetim Paneli</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    /* Admin giriş sayfası için şık ve profesyonel bekleme ekranı */
+    body { background: #14161a; color: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: 'Inter', sans-serif; }
+    .loader-wrap { text-align: center; }
+    .loader { border: 3px solid #1f2328; border-top: 3px solid #ff5a1f; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+    .loader-text { font-size: 14px; letter-spacing: 2px; color: #9aa2ab; text-transform: uppercase; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="loader-wrap">
+    <div class="loader"></div>
+    <div class="loader-text">Panel Yükleniyor...</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.0/dist/decap-cms.js"></script>
+
+  <script>
+    // ==========================================================================
+    // CANLI ÖNİZLEME PANELİ
+    // Formda bir alan değiştirildiğinde sağ tarafta renkli, okunabilir bir
+    // özet gösterir: renkler kutu olarak, görseller küçük resim olarak,
+    // aç/kapa alanları rozet olarak, listeler ise kart/madde olarak görünür.
+    // Bu sayede "hangi alan neye karşılık geliyor" daha net anlaşılır.
+    // ==========================================================================
+    (function () {
+      function baslat() {
+        if (!window.CMS || !window.createClass || !window.h) return;
+        var h = window.h;
+        var createClass = window.createClass;
+
+        function guzelEtiket(key) {
+          return key.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+        }
+        function renkMi(v) { return typeof v === 'string' && /^#([0-9a-f]{3}){1,2}$/i.test(v); }
+        function gorselMi(v) {
+          return typeof v === 'string' && v.length > 0 &&
+            (/^(https?:|blob:|data:image)/.test(v) || /\.(png|jpe?g|gif|svg|webp)$/i.test(v));
+        }
+
+        function degerGoster(val) {
+          if (val === null || val === undefined || val === '') {
+            return h('span', { style: { color: '#666', fontStyle: 'italic' } }, '(boş)');
+          }
+          if (typeof val === 'boolean') {
+            return h('span', {
+              style: {
+                display: 'inline-block', padding: '3px 10px', borderRadius: '12px',
+                fontSize: '12px', fontWeight: 'bold',
+                background: val ? 'rgba(0,200,120,0.15)' : 'rgba(255,80,80,0.15)',
+                color: val ? '#00c878' : '#ff5050'
+              }
+            }, val ? '✓ Aktif' : '✗ Pasif');
+          }
+          if (renkMi(val)) {
+            return h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+              h('span', { style: { width: '26px', height: '26px', borderRadius: '6px', background: val, border: '1px solid rgba(255,255,255,0.25)', display: 'inline-block' } }),
+              h('code', {}, val)
+            );
+          }
+          if (gorselMi(val)) {
+            return h('img', { src: val, style: { maxWidth: '220px', maxHeight: '160px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.12)' } });
+          }
+          if (Array.isArray(val)) {
+            if (val.length === 0) return h('span', { style: { color: '#666', fontStyle: 'italic' } }, '(liste boş)');
+            if (typeof val[0] === 'object') {
+              return h('div', {}, val.map(function (item, i) {
+                return h('div', {
+                  key: i,
+                  style: { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px', marginBottom: '10px' }
+                }, Object.keys(item).map(function (k) {
+                  return h('div', { key: k, style: { marginBottom: '6px' } },
+                    h('div', { style: { fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', color: '#888' } }, guzelEtiket(k)),
+                    degerGoster(item[k])
+                  );
+                }));
+              }));
+            }
+            return h('ul', { style: { margin: 0, paddingLeft: '20px' } }, val.map(function (item, i) {
+              return h('li', { key: i, style: { marginBottom: '4px' } }, String(item));
+            }));
+          }
+          if (typeof val === 'object') {
+            return h('pre', { style: { whiteSpace: 'pre-wrap', fontSize: '12px', background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '6px' } }, JSON.stringify(val, null, 2));
+          }
+          return h('div', {}, String(val));
+        }
+
+        var GenelOnizleme = createClass({
+          render: function () {
+            var data = this.props.entry.get('data');
+            var dataJS = (data && data.toJS) ? data.toJS() : {};
+            var keys = Object.keys(dataJS);
+            return h('div', {
+              style: { background: '#0b0c0e', color: '#e8e8e8', minHeight: '100%', padding: '32px', fontFamily: "'Inter', sans-serif" }
+            },
+              h('div', { style: { fontFamily: "'Space Grotesk', sans-serif", fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', color: '#ff5a1f', marginBottom: '24px' } }, 'ENTE METAL PLASTİK — Önizleme'),
+              keys.map(function (key) {
+                return h('div', {
+                  key: key,
+                  style: { marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid rgba(255,255,255,0.08)' }
+                },
+                  h('div', { style: { fontSize: '12px', color: '#00e5ff', marginBottom: '8px', fontWeight: '600' } }, guzelEtiket(key)),
+                  degerGoster(dataJS[key])
+                );
+              })
+            );
+          }
+        });
+
+        ['marka', 'hero', 'hakkimizda', 'iletisim', 'urunler_bolumu', 'teklif_formu', 'ux', 'urunler_dosyasi', 'blocks_list']
+          .forEach(function (ad) { CMS.registerPreviewTemplate(ad, GenelOnizleme); });
+      }
+
+      // decap-cms.js senkron yüklendiği için normalde hazırdır; yine de
+      // güvenlik amacıyla kısa bir kontrol/yeniden deneme ekleniyor.
+      if (window.CMS) { baslat(); } else { window.addEventListener('load', baslat); }
+    })();
+  </script>
+
+  <script>
+    // Netlify Identity Login & Redirect Motoru
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            // Kullanıcı başarıyla doğrulandığında admin arayüzüne yönlendir
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
